@@ -13,7 +13,7 @@ void parse_json_response(const char* json_resp){
     cJSON* tags = cJSON_GetObjectItem(root, "tags");
 
     if (content && author){
-        printf("Quote : %s\n", content->valuestring); 
+        printf("'%s'\n", content->valuestring); 
         printf("By %s\n", author->valuestring);
     } else {
         printf("Error: content or author not found\n");

@@ -10,11 +10,11 @@ size_t cb(void *d, size_t n, size_t l, void *p){ // d : pointer to the data, n :
     return size;
 }
 
-void fetch_api(char* buffer, int buffer_size){
+void fetch_api_with_url(const char* url, char* buffer, int buffer_size){
     CURL *curl = curl_easy_init(); // initialize curl
     if (curl){
         CURLcode res;
-        curl_easy_setopt(curl, CURLOPT_URL,"https://api.quotable.io/random"); // set url
+        curl_easy_setopt(curl, CURLOPT_URL,url); // set url
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, cb); // set callback function 
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, buffer); // set buffer
 
@@ -24,4 +24,19 @@ void fetch_api(char* buffer, int buffer_size){
         }
         curl_easy_cleanup(curl); // oposite of curl_easy_init
     }
+}
+
+void fetch_api(char* buffer, int buffer_size){
+    const char *url = "https://api.quotable.io/random";
+    fetch_api_with_url(url, buffer, buffer_size);
+}
+
+void fetch_quote_by_kw(char* buffer, int buffer_size, const char* kw){
+    char url[1000];
+    if (strlen(kw) > 0){
+        sprintf(url, "https://api.quotable.io/quotes?tags=%s", kw); // put the string in the url variable
+    } else {
+        sprintf(url, "https://api.quotable.io/random"); // same
+    }
+    fetch_api_with_url(url, buffer, buffer_size);
 }
