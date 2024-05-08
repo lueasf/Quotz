@@ -1,0 +1,11 @@
+# FETCH_API
+
+La fonction fecth_api crée un objet curl pour gérer la requête HTTP vers l'URL de l'api.
+Grace a curl_easy_perform on stoque la réponse de la requête dans le buffer via
+la foncion de callback.
+
+La foncion de callback est utilisé pour capturer les données reçus.
+Les données reçues sont concaténées chacune leur tour dans le buffer qu'on
+a spécifié dans CURLOPT_WRITEDATA.
+
+La fonction Main appelle fecth_api et printf les données dans la sortie standard.
