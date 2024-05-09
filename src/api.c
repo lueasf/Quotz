@@ -31,12 +31,19 @@ void fetch_api(char* buffer, int buffer_size){
     fetch_api_with_url(url, buffer, buffer_size);
 }
 
-void fetch_quote_by_kw(char* buffer, int buffer_size, const char* kw){
-    char url[1000];
-    if (strlen(kw) > 0){
-        sprintf(url, "https://api.quotable.io/quotes?tags=%s", kw); // put the string in the url variable
-    } else {
-        sprintf(url, "https://api.quotable.io/random"); // same
-    }
+void fetch_quote_by_kw(char *buffer, size_t buffer_size, const char *kw) {
+    char url[100];
+    snprintf(url, sizeof(url), "https://api.quotable.io/random?tags=%s", kw); // put the string in the url variable
+
+    memset(buffer, 0, sizeof(buffer)); // clear buffer before each use !!!!
+
     fetch_api_with_url(url, buffer, buffer_size);
 }
+
+
+//     if (strlen(kw) > 0){
+//         sprintf(url, "https://api.quotable.io/quotes?tags=%s", kw); // put the string in the url variable
+//     } else {
+//         sprintf(url, "https://api.quotable.io/random"); // same
+//     }
+//     fetch_api_with_url(url, buffer, buffer_size);

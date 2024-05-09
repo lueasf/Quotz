@@ -1,9 +1,17 @@
 #include <stdio.h>
 #include <cjson/cJSON.h> // bibli cJSON
+#include <string.h>
 #include "pars.h"
 
 void parse_json_response(const char* json_resp){
-    cJSON* root = cJSON_Parse(json_resp);
+
+    const char *json_start = strchr(json_resp, '{');
+    if (json_start == NULL) {
+        printf("Aucun objet JSON trouvé dans la réponse.\n");
+        return;
+    }
+
+    cJSON* root = cJSON_Parse(json_start);
     if (root == NULL){
         fprintf(stderr, "Error from cJSON_Parse: %s\n", cJSON_GetErrorPtr());
     }

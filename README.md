@@ -2,6 +2,7 @@
 
 ## Description
 This repo contains a prog that generates quotes from an API.
+More specifically, it uses the API from https://api.quotable.io/random to get the quotes.
 
 ## lib
 curl : sudo apt-get install libcurl4-openssl-dev
