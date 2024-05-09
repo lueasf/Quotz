@@ -20,11 +20,25 @@ void parse_json_response(const char* json_resp){
     cJSON* author = cJSON_GetObjectItem(root, "author");
     cJSON* tags = cJSON_GetObjectItem(root, "tags");
 
-    if (content && author){
+    if (content && author && tags){
         printf("'%s'\n", content->valuestring); 
         printf("By %s\n", author->valuestring);
+        
+        // check if tags is an array (struct linked list)
+        if (cJSON_IsArray(tags)){
+            printf("Tags: ");
+            cJSON* tag = tags->child; // get the first tag
+            while (tag){
+                printf("#%s ", tag->valuestring);
+                tag = tag->next; // get the next tag
+            }
+            printf("\n");
+        } else {
+            printf("Tags: %s\n", tags->valuestring);
+        }
+
     } else {
-        printf("Error: content or author not found\n");
+        printf("Error: content not found\n");
     }
 
     cJSON_Delete(root); 

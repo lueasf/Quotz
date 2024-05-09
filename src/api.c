@@ -40,7 +40,6 @@ void fetch_quote_by_kw(char *buffer, size_t buffer_size, const char *kw) {
     fetch_api_with_url(url, buffer, buffer_size);
 }
 
-
 //     if (strlen(kw) > 0){
 //         sprintf(url, "https://api.quotable.io/quotes?tags=%s", kw); // put the string in the url variable
 //     } else {

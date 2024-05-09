@@ -34,10 +34,10 @@ int main(){
 
             case 3:
                 char kw[50];
+                fflush(stdin);
                 printf("Keyword?\n");
 
                 // Vider le buffer d'entrée standard avant d'utiliser fgets
-                fflush(stdin);
                 fgets(kw, sizeof(kw), stdin);
 
                 // Supprimer le caractère de nouvelle ligne
